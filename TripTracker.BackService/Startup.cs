@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TripTracker.BackService.Data;
 
 namespace TripTracker.BackService
 {
@@ -27,9 +29,9 @@ namespace TripTracker.BackService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<Models.Repository>();
+            //services.AddTransient<Models.Repository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-           
+            services.AddDbContext<TripContext>(options => options.UseSqlite("trip_track_development.db"))
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
